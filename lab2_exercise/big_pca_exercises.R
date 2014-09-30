@@ -55,14 +55,15 @@ object.size(m.dense)
 #         are correlated with one another.
 
 
-microbenchmark(t(chol(m.dense)), unit="ms")
-microbenchmark(t(chol(m.sparse)), unit="ms")
 A.sparse <- t(chol(m.sparse))
 X <- as.matrix(t(A.sparse %*% matrix(rnorm(n*p), p, n)))
 
 
 
 # Task 2: Use scale() to center and scale the columns.
+
+X.scale <- scale(X, center = TRUE, scale = TRUE)
+
 # Task 3: Calculate the principal components using the four
 #         functions svd(), irlba(), eigen(), and irlba().
 #         With irlba(), just look at the top five.
