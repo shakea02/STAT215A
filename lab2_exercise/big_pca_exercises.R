@@ -57,6 +57,7 @@ object.size(m.dense)
 
 A.sparse <- t(chol(m.sparse))
 X <- as.matrix(t(A.sparse %*% matrix(rnorm(n*p), p, n)))
+plot(X[1,], type = 'l')
 
 
 
@@ -69,6 +70,15 @@ X.scale <- scale(X, center = TRUE, scale = TRUE)
 #         With irlba(), just look at the top five.
 #         Confirm that they give the same answer.  Note:
 #         you need to think about the normalizing constants.
+
+svd.x <- svd(X.scale, nu=5, nv=5)
+
+irlba.x <- irlba(X.scale)
+
+eigen.x <- eigen(cov(X.scale,X.scale))
+
+
+
 # Task 4: Use microbenchmark to compare the speeds.  What method
 #         is the fastest?
 # Task 5: Implement the power method to find the top eigenvalue
