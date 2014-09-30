@@ -53,6 +53,15 @@ object.size(m.dense)
 #         observation with covariance matrix m.sparse.  Check that the covariance
 #         is correct.  Generate a plot of the first row showing that adjacent columns
 #         are correlated with one another.
+
+
+microbenchmark(t(chol(m.dense)), unit="ms")
+microbenchmark(t(chol(m.sparse)), unit="ms")
+A.sparse <- t(chol(m.sparse))
+X <- as.matrix(t(A.sparse %*% matrix(rnorm(n*p), p, n)))
+
+
+
 # Task 2: Use scale() to center and scale the columns.
 # Task 3: Calculate the principal components using the four
 #         functions svd(), irlba(), eigen(), and irlba().
